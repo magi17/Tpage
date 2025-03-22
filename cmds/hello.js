@@ -1,8 +1,10 @@
-const { sendText } = require('../index');
+const sendText = require('../utils/sendText');
 
 module.exports = {
     name: 'hello',
-    run: async (senderId, args) => {
-        await sendText(senderId, `Hello! Kupal How can I help you today?`);
+    description: 'Replies with a greeting message.',
+    execute: async (event, pageAccessToken) => {
+        const senderId = event.sender.id;
+        await sendText(senderId, 'Hello! How can I assist you today?', pageAccessToken);
     }
 };
