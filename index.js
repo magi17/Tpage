@@ -35,7 +35,7 @@ const visionModel = genAI.getGenerativeModel({
 const chatSessions = new Map();
 
 // Facebook Configuration
-const PAGE_ACCESS_TOKEN = 'EAAPaZCpSdRWcBO51gUngRGZBO7LWpV6dWHiRRF0f3dKVPsVz1JIqQWagbZCHjKIl7y2lMf4QiQZBDIcaY5awXTiD8mSTsvcjNPOZCG1gVS5Gku6MXQykWpgln4imsbrRacFhFs2BRTsKYzLDblvYgp1U9Bv6ILavsi1YqD9vKRsC3rNwjQu0oA6aJQA9IyMZAZCpgZDZD';
+const PAGE_ACCESS_TOKEN = 'EAAPaZCpSdRWcBO47nRRZAJrrh4QZATkxJZARhPIOW5opr6lhu9QVqhkpSRPXxUUZA2ehOuPzgN6WRSux7gd5TZCJ506FgFf37mRlAAlMGWA18YZAQVj48AYEKNbcv6ZCj5jrTmJXZB9ZCBgexlPei1ZAqZBB1y7SbFupbvtEqdEYK31QsIZBwpowFBxiHXzAFo7xKFiGblQZDZD';
 const VERIFY_TOKEN = 'bobo';
 
 // Supported image MIME types for Gemini Vision
