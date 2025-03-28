@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 // Enhanced Gemini Configuration
 const genAI = new GoogleGenerativeAI('AIzaSyD5CCNspQlYuqIR2t1BggzEFG0jmTThino');
 const visionModel = genAI.getGenerativeModel({
-  model: "gemini-2.5-pro-exp-03-25",
+  model: "gemini-2.0-flash",
   generationConfig: {
     temperature: 0.9,
     topP: 0.95,
