@@ -8,9 +8,9 @@ const app = express();
 app.use(bodyParser.json());
 
 // Enhanced Gemini Configuration
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AIzaSyC5n8Fr6Xq722k0jkrRM0emqSQk_4s_C-o');
+const genAI = new GoogleGenerativeAI('AIzaSyD5CCNspQlYuqIR2t1BggzEFG0jmTThino');
 const visionModel = genAI.getGenerativeModel({
-  model: "gemini-1.5-pro", // Updated to latest vision-capable model
+  model: "gemini-1.5-pro",
   generationConfig: {
     temperature: 0.9,
     topP: 0.95,
@@ -26,7 +26,7 @@ const visionModel = genAI.getGenerativeModel({
   systemInstruction: {
     role: "model",
     parts: [{ 
-      text: "You are a helpful AI assistant with vision capabilities. When analyzing images, be descriptive and provide detailed insights. For multiple images, compare and contrast them when relevant." 
+      text: "You are a helpful AI assistant with vision capabilities. Respond conversationally and provide detailed insights when analyzing images." 
     }]
   }
 });
@@ -35,8 +35,8 @@ const visionModel = genAI.getGenerativeModel({
 const chatSessions = new Map();
 
 // Facebook Configuration
-const PAGE_ACCESS_TOKEN = process.env.FB_PAGE_TOKEN || '';
-const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN || 'bobo';
+const PAGE_ACCESS_TOKEN = 'EAAPaZCpSdRWcBO51gUngRGZBO7LWpV6dWHiRRF0f3dKVPsVz1JIqQWagbZCHjKIl7y2lMf4QiQZBDIcaY5awXTiD8mSTsvcjNPOZCG1gVS5Gku6MXQykWpgln4imsbrRacFhFs2BRTsKYzLDblvYgp1U9Bv6ILavsi1YqD9vKRsC3rNwjQu0oA6aJQA9IyMZAZCpgZDZD';
+const VERIFY_TOKEN = 'bobo';
 
 // Supported image MIME types for Gemini Vision
 const SUPPORTED_IMAGE_TYPES = [
@@ -69,12 +69,20 @@ app.post('/webhook', async (req, res) => {
         if (!chatSessions.has(senderId)) {
           chatSessions.set(senderId, {
             chat: visionModel.startChat({
-              history: [{
-                role: "model",
-                parts: [{ 
-                  text: "Hello! I'm an AI assistant with vision capabilities. You can send me images and I'll analyze them for you." 
-                }]
-              }]
+              history: [
+                // Corrected: First message must be from user
+                {
+                  role: "user",
+                  parts: [{ text: "Hello" }]
+                },
+                // Then model response
+                {
+                  role: "model",
+                  parts: [{ 
+                    text: "Hello! I'm an AI assistant with vision capabilities. You can send me images and I'll analyze them for you." 
+                  }]
+                }
+              ]
             }),
             lastActivity: Date.now()
           });
